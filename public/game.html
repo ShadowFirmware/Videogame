@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>EducaRunner</title>
+  <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+  <div id="game-container"></div>
+
+  <!-- Phaser 3 desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+
+  <!-- Entidades -->
+  <script src="js/game/entities/Player.js"></script>
+  <script src="js/game/entities/Obstacle.js"></script>
+
+  <!-- Escenas (orden importa) -->
+  <script src="js/game/scenes/BootScene.js"></script>
+  <script src="js/game/scenes/MenuScene.js"></script>
+  <script src="js/game/scenes/GameScene.js"></script>
+  <script src="js/game/scenes/QuestionScene.js"></script>
+  <script src="js/game/scenes/GameOverScene.js"></script>
+  <script src="js/game/scenes/ResultScene.js"></script>
+
+  <!-- Configuración principal -->
+  <script src="js/game/main.js"></script>
+</body>
+</html>

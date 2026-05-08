@@ -1,0 +1,6 @@
+text,option_a,option_b,option_c,correct_option,explanation,topic,difficulty
+¿Qué tipo de dato almacena true o false?,int,boolean,String,b,boolean almacena valores verdadero o falso.,variables_tipos,easy
+¿Cuántas veces se ejecuta for(i=0;i<5;i++)?,4,5,6,b,i va de 0 a 4 que son 5 iteraciones.,estructuras_control,easy
+¿Qué es una función?,Un tipo de dato,Un bloque de código reutilizable,Un operador matemático,b,Una función agrupa código con un nombre para reutilizarlo.,funciones,easy
+¿Qué es una clase en POO?,Una variable especial,Una plantilla para crear objetos,Un método estático,b,Una clase define las propiedades y comportamientos de los objetos.,poo,easy
+¿Cuál es el índice del primer elemento de un arreglo?,1,0,-1,b,En la mayoría de lenguajes los arreglos empiezan en el índice 0.,estructuras_datos,easy

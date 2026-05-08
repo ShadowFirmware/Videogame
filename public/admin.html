@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EducaRunner - Panel Administrador</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Login de admin (si no hay sesión) -->
+  <div id="admin-login-screen" class="auth-container hidden">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">⚙️</div>
+        <h1>EducaRunner</h1>
+        <p class="auth-subtitle">Panel de Administrador</p>
+      </div>
+      <form id="admin-login-form" class="auth-form active">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="al-email" required placeholder="admin@educarunner.com">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" id="al-pass" required>
+        </div>
+        <div id="al-error" class="form-error hidden"></div>
+        <button type="submit" class="btn-primary">Entrar al Panel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Panel principal -->
+  <div id="admin-panel" class="admin-panel hidden">
+    <aside class="sidebar">
+      <div class="sidebar-logo">🏃 EducaRunner</div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-section="preguntas">
+          <span class="nav-icon">❓</span> Preguntas
+        </button>
+        <button class="nav-item" data-section="estadisticas">
+          <span class="nav-icon">📊</span> Estadísticas
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <span id="admin-username">Admin</span>
+        <button id="admin-logout" class="btn-outline" style="width:100%;margin-top:.5rem">Salir</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <!-- SECCIÓN PREGUNTAS -->
+      <section id="section-preguntas" class="admin-section">
+        <div class="section-header">
+          <h2>Gestión de Preguntas</h2>
+          <div class="header-actions">
+            <button id="btn-upload-csv" class="btn-secondary">📁 Subir CSV</button>
+            <button id="btn-new-question" class="btn-primary-sm">+ Nueva Pregunta</button>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-bar">
+          <select id="filter-topic" class="filter-select">
+            <option value="">Todos los temas</option>
+            <option value="variables_tipos">Variables y Tipos</option>
+            <option value="estructuras_control">Estructuras de Control</option>
+            <option value="funciones">Funciones</option>
+            <option value="poo">POO</option>
+            <option value="estructuras_datos">Estructuras de Datos</option>
+          </select>
+          <select id="filter-difficulty" class="filter-select">
+            <option value="">Todas las dificultades</option>
+            <option value="easy">Fácil</option>
+            <option value="medium">Media</option>
+            <option value="hard">Difícil</option>
+          </select>
+          <input type="search" id="filter-search" class="filter-input" placeholder="Buscar pregunta...">
+          <button id="btn-filter" class="btn-primary-sm">Buscar</button>
+        </div>
+
+        <div id="questions-count" class="questions-count"></div>
+        <div id="questions-list" class="questions-list">
+          <div class="loading">Cargando preguntas...</div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN ESTADÍSTICAS -->
+      <section id="section-estadisticas" class="admin-section hidden">
+        <div class="section-header">
+          <h2>Estadísticas de Estudiantes</h2>
+          <button id="btn-refresh-stats" class="btn-secondary">↻ Actualizar</button>
+        </div>
+        <div id="stats-summary" class="stats-summary"></div>
+        <div class="stats-grid-admin">
+          <div class="stats-card-wide">
+            <h3>Rendimiento por Tema</h3>
+            <div id="topic-stats"></div>
+          </div>
+        </div>
+        <h3 style="margin:1.5rem 0 1rem">Estudiantes</h3>
+        <div id="students-list" class="students-list">
+          <div class="loading">Cargando...</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal: Crear/Editar Pregunta -->
+  <div id="modal-question" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Nueva Pregunta</h3>
+        <button id="modal-close" class="modal-close">✕</button>
+      </div>
+      <form id="form-question" class="modal-form">
+        <input type="hidden" id="q-id">
+        <div class="form-group">
+          <label>Pregunta *</label>
+          <textarea id="q-text" rows="3" required placeholder="Escribe la pregunta aquí..."></textarea>
+        </div>
+        <div class="options-grid">
+          <div class="form-group">
+            <label>Opción A *</label>
+            <input type="text" id="q-a" required placeholder="Opción A">
+          </div>
+          <div class="form-group">
+            <label>Opción B *</label>
+            <input type="text" id="q-b" required placeholder="Opción B">
+          </div>
+          <div class="form-group">
+            <label>Opción C *</label>
+            <input type="text" id="q-c" required placeholder="Opción C">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Respuesta Correcta *</label>
+            <select id="q-correct" required>
+              <option value="a">A</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tema *</label>
+            <select id="q-topic" required>
+              <option value="variables_tipos">Variables y Tipos</option>
+              <option value="estructuras_control">Estructuras de Control</option>
+              <option value="funciones">Funciones</option>
+              <option value="poo">POO</option>
+              <option value="estructuras_datos">Estructuras de Datos</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Dificultad *</label>
+            <select id="q-difficulty">
+              <option value="easy">Fácil</option>
+              <option value="medium">Media</option>
+              <option value="hard">Difícil</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Explicación (se muestra si el jugador falla)</label>
+          <textarea id="q-explanation" rows="2" placeholder="Explica por qué esa es la respuesta correcta..."></textarea>
+        </div>
+        <div id="q-error" class="form-error hidden"></div>
+        <div class="modal-actions">
+          <button type="button" id="btn-cancel-modal" class="btn-outline">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar Pregunta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Subir CSV -->
+  <div id="modal-csv" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Subir Preguntas por CSV</h3>
+        <button class="modal-close" onclick="document.getElementById('modal-csv').classList.add('hidden')">✕</button>
+      </div>
+      <div class="csv-instructions">
+        <p>El archivo CSV debe tener estas columnas:</p>
+        <code>text, option_a, option_b, option_c, correct_option, explanation, topic, difficulty</code>
+        <ul>
+          <li><strong>correct_option:</strong> a, b o c</li>
+          <li><strong>topic:</strong> variables_tipos | estructuras_control | funciones | poo | estructuras_datos</li>
+          <li><strong>difficulty:</strong> easy | medium | hard</li>
+        </ul>
+        <a id="download-template" class="link-btn" href="#">Descargar plantilla de ejemplo</a>
+      </div>
+      <div class="form-group" style="margin-top:1rem">
+        <label>Seleccionar archivo CSV</label>
+        <input type="file" id="csv-file" accept=".csv">
+      </div>
+      <div id="csv-result" class="hidden"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="document.getElementById('modal-csv').classList.add('hidden')">Cancelar</button>
+        <button id="btn-upload-submit" class="btn-primary">Subir archivo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

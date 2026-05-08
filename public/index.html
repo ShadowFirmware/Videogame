@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EducaRunner - Iniciar Sesión</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">🏃</div>
+        <h1>EducaRunner</h1>
+        <p class="auth-subtitle">Aprende programación corriendo</p>
+      </div>
+
+      <!-- Pestañas -->
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+        <button class="tab-btn" data-tab="register">Registrarse</button>
+      </div>
+
+      <!-- Login -->
+      <form id="form-login" class="auth-form active">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="tu@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <div id="login-error" class="form-error hidden"></div>
+        <button type="submit" class="btn-primary" id="btn-login">
+          <span class="btn-text">Iniciar Sesión</span>
+          <span class="btn-loader hidden">Cargando...</span>
+        </button>
+      </form>
+
+      <!-- Registro -->
+      <form id="form-register" class="auth-form">
+        <div class="form-group">
+          <label for="reg-username">Nombre de Usuario</label>
+          <input type="text" id="reg-username" placeholder="TuNombre" required minlength="3" maxlength="30">
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" placeholder="tu@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Contraseña</label>
+          <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
+        </div>
+        <div id="reg-error" class="form-error hidden"></div>
+        <button type="submit" class="btn-primary" id="btn-register">
+          <span class="btn-text">Crear Cuenta</span>
+          <span class="btn-loader hidden">Cargando...</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard del estudiante (oculto hasta login) -->
+  <div id="dashboard" class="dashboard hidden">
+    <header class="dash-header">
+      <div class="dash-logo">🏃 EducaRunner</div>
+      <button id="btn-logout" class="btn-outline">Cerrar Sesión</button>
+    </header>
+
+    <main class="dash-main">
+      <div class="profile-card">
+        <div class="profile-avatar" id="profile-avatar">?</div>
+        <div class="profile-info">
+          <h2 id="profile-username">Usuario</h2>
+          <p class="profile-level">Nivel: <strong id="profile-level">Principiante</strong></p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-partidas">0</div>
+          <div class="stat-label">Partidas jugadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-record">0</div>
+          <div class="stat-label">Récord de puntos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-distancia">0m</div>
+          <div class="stat-label">Mejor distancia</div>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h3>Selecciona un tema para jugar</h3>
+        <div class="topic-grid">
+          <button class="topic-btn" data-topic="variables_tipos">
+            <span class="topic-icon">📦</span>
+            <span class="topic-name">Variables y Tipos</span>
+          </button>
+          <button class="topic-btn" data-topic="estructuras_control">
+            <span class="topic-icon">🔀</span>
+            <span class="topic-name">Estructuras de Control</span>
+          </button>
+          <button class="topic-btn" data-topic="funciones">
+            <span class="topic-icon">⚡</span>
+            <span class="topic-name">Funciones</span>
+          </button>
+          <button class="topic-btn" data-topic="poo">
+            <span class="topic-icon">🏛️</span>
+            <span class="topic-name">POO</span>
+          </button>
+          <button class="topic-btn" data-topic="estructuras_datos">
+            <span class="topic-icon">📊</span>
+            <span class="topic-name">Estructuras de Datos</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="history-section">
+        <h3>Últimas partidas</h3>
+        <div id="history-list" class="history-list">
+          <p class="no-data">Aún no has jugado ninguna partida.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
