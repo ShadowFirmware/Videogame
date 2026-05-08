@@ -71,9 +71,6 @@ class GameScene extends Phaser.Scene {
     this.questionTimer = this.time.addEvent({ delay: 20000, callback: this.triggerQuestion, callbackScope: this, loop: true });
     this.speedTimer    = this.time.addEvent({ delay: 8000,  callback: () => { this.gameSpeed = Math.min(this.gameSpeed + 25, 550); }, callbackScope: this, loop: true });
 
-    // Partículas
-    this.particles = this.add.particles(0, 0, 'star', { active: false, maxParticles: 20 });
-
     // Escuchar resultado de pregunta
     this.game.events.on('questionCorrect', this.onQuestionCorrect, this);
     this.game.events.on('questionWrong',   this.onQuestionWrong,   this);

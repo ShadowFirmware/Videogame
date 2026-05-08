@@ -94,8 +94,7 @@ class QuestionScene extends Phaser.Scene {
     this.tweens.add({ targets: char, y: H * 0.5 - 10, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
 
     // Animación de entrada
-    const allItems = [panel, overlay];
-    this.add.tween({ targets: panel, scaleX: { from: 0.8, to: 1 }, scaleY: { from: 0.8, to: 1 }, alpha: { from: 0, to: 1 }, duration: 200, ease: 'Back.easeOut' });
+    this.tweens.add({ targets: panel, scaleX: { from: 0.8, to: 1 }, scaleY: { from: 0.8, to: 1 }, alpha: { from: 0, to: 1 }, duration: 200, ease: 'Back.easeOut' });
   }
 
   answer(selected, btnRect, options) {

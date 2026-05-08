@@ -54,10 +54,16 @@ class BootScene extends Phaser.Scene {
     g.generateTexture('obstacle2', 60, 60);
     g.destroy();
 
-    // Partícula de corrección
+    // Partícula de corrección (estrella 5 puntas con fillPoints)
     g = this.make.graphics({ x: 0, y: 0, add: false });
     g.fillStyle(0xFFD700);
-    g.fillStar(16, 16, 5, 16, 7);
+    const starPts = [];
+    for (let i = 0; i < 10; i++) {
+      const ang = (i * Math.PI) / 5 - Math.PI / 2;
+      const r = i % 2 === 0 ? 14 : 6;
+      starPts.push(new Phaser.Math.Vector2(16 + r * Math.cos(ang), 16 + r * Math.sin(ang)));
+    }
+    g.fillPoints(starPts, true);
     g.generateTexture('star', 32, 32);
     g.destroy();
 
