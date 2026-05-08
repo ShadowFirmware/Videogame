@@ -1,4 +1,6 @@
 node_modules/
 backend/.env
 backend/db/game.db
+backend/db/game.db-shm
+backend/db/game.db-wal
 *.log
