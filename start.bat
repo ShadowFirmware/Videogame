@@ -19,8 +19,8 @@ if not exist node_modules (
 echo  [2/2] Iniciando servidor...
 echo.
 echo  Abre tu navegador en:
-echo    http://localhost:3000         ^<-- Login de estudiantes
-echo    http://localhost:3000/admin   ^<-- Panel de administrador
+echo    http://localhost:4000         ^<-- Login de estudiantes
+echo    http://localhost:4000/admin   ^<-- Panel de administrador
 echo.
 echo  Credenciales de administrador:
 echo    Email:      admin@educarunner.com
@@ -30,7 +30,7 @@ echo  Presiona Ctrl+C para detener el servidor.
 echo  ================================================
 echo.
 
-start "" "http://localhost:3000"
+start "" "http://localhost:4000"
 npm start
 
 pause
